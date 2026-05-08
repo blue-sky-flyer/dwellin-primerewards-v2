@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dwellin Rewards – Your Home Is Waiting</title>
+  <title>Dwellin is now Dwellin Rewards</title>
   <style>
     /* ── Reset ── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -225,6 +225,63 @@
       width: 0%;
     }
 
+    /* ── Rebrand eyebrow (hero) ── */
+    .rebrand-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,169,97,.18);
+      border: 1px solid rgba(201,169,97,.45);
+      border-radius: 20px; padding: 0.35rem 1.1rem;
+      margin-bottom: 1.5rem; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .rebrand-old  { color: rgba(255,255,255,.55); }
+    .rebrand-arr  { color: rgba(255,255,255,.4); font-size: 0.85rem; }
+    .rebrand-new  { color: var(--gold); }
+
+    /* ── Announcement section (What's New replacement) ── */
+    .announce-section { background: var(--bg); }
+    .announce-intro {
+      max-width: 620px; margin: 0 auto 2.5rem;
+    }
+    .announce-intro .section-label { color: var(--gold-dark); }
+    .announce-heading {
+      font-size: 2.25rem; color: var(--text); font-weight: 800;
+      line-height: 1.15; margin-bottom: 0.75rem;
+    }
+    .announce-heading .brand-old  { color: var(--text-muted); font-weight: 500; }
+    .announce-heading .brand-arr  { color: var(--gold); margin: 0 0.25rem; }
+    .announce-heading .brand-new  { color: var(--green-dark); }
+    .announce-sub { font-size: 1.05rem; color: var(--text-muted); margin: 0; }
+    .announce-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; text-align: left;
+    }
+    .announce-col {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1.75rem; box-shadow: var(--shadow-sm);
+    }
+    .announce-col.still-here { border-top: 4px solid var(--green); }
+    .announce-col.whats-new  {
+      border-top: 4px solid var(--gold);
+      background: linear-gradient(160deg, rgba(201,169,97,.06) 0%, var(--white) 60%);
+    }
+    .announce-col-label {
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .announce-col.still-here .announce-col-label { color: var(--green); }
+    .announce-col.whats-new  .announce-col-label { color: var(--gold-dark); }
+    .announce-list { list-style: none; }
+    .announce-list li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+      font-size: 0.9375rem;
+    }
+    .announce-list li:last-child { border-bottom: none; }
+    .al-icon { flex-shrink: 0; font-size: 1.1rem; margin-top: 0.05rem; }
+    .al-text strong { display: block; color: var(--text); font-size: 0.9375rem; }
+    .al-text span   { display: block; color: var(--text-muted); font-size: 0.8rem; margin-top: 0.1rem; }
+
     /* ── What's New ── */
     .new-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -405,7 +462,8 @@
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
-      .steps-grid, .new-grid, .action-cards { grid-template-columns: 1fr; }
+      .steps-grid, .new-grid, .action-cards, .announce-split { grid-template-columns: 1fr; }
+      .announce-heading { font-size: 1.625rem; }
       .step-arrow { display: none; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .hero-stat-row { gap: 1.5rem; }
@@ -447,10 +505,14 @@
   ═══════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
-      <div id="hero-eyebrow" class="hero-eyebrow">Dwellin Rewards</div>
-      <h1 id="hero-h1">Your home can earn you rewards</h1>
-      <p id="hero-sub" class="hero-sub">Track your home &rarr; earn points &rarr; redeem real rewards</p>
-      <p id="hero-sub-small" class="hero-sub-small">Start earning in under 60 seconds</p>
+      <div id="hero-eyebrow" class="rebrand-eyebrow">
+        <span class="rebrand-old">Dwellin</span>
+        <span class="rebrand-arr">&rarr;</span>
+        <span class="rebrand-new">Dwellin Rewards</span>
+      </div>
+      <h1 id="hero-h1">Everything you loved about Dwellin, now with rewards.</h1>
+      <p id="hero-sub" class="hero-sub">All the things that got you excited are still here &mdash; we just added something big.</p>
+      <p id="hero-sub-small" class="hero-sub-small">Your home profile, inventory, and calendar are all waiting for you.</p>
       <div class="hero-buttons">
         <a href="#" id="hero-primary-cta" class="btn btn-gold btn-lg">Continue in App</a>
         <a href="#" id="hero-secondary-cta" class="btn btn-outline-white btn-lg">Get the App</a>
@@ -484,8 +546,8 @@
         <div class="profile-saved-header">
           <div class="saved-icon-wrap">🏠</div>
           <div class="saved-title-group">
-            <p class="saved-title" id="saved-title">Everything you&rsquo;ve shared about your home is all here in Dwellin.</p>
-            <p class="saved-subtitle" id="saved-subtitle">Nothing was lost. Pick up right where you stopped.</p>
+            <p class="saved-title" id="saved-title">Everything you&rsquo;ve shared about your home moved with you to Dwellin Rewards.</p>
+            <p class="saved-subtitle" id="saved-subtitle">Nothing was lost. Your profile is exactly where you left it.</p>
           </div>
           <a href="#" class="btn btn-gold" id="saved-resume-btn">Resume &rarr;</a>
         </div>
@@ -569,29 +631,95 @@
 
 
   <!-- ═══════════════════════════════
-       WHAT'S NEW
+       ANNOUNCEMENT — Dwellin → Dwellin Rewards
   ═══════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container text-center">
-      <span class="section-label">What&rsquo;s New</span>
-      <h2 id="whats-new-heading" class="section-heading">Here&rsquo;s what changed since you last visited</h2>
-      <p id="whats-new-sub" class="section-sub">Dwellin Rewards is fully live &mdash; and it&rsquo;s even better than when you first signed up.</p>
-      <div class="new-grid">
-        <div class="new-card">
-          <div class="new-tag">New</div>
-          <h4>Earn points on every action</h4>
-          <p>Every item you add, receipt you upload, and task you complete now earns redeemable points &mdash; automatically.</p>
+  <section class="section announce-section">
+    <div class="container">
+
+      <!-- Intro -->
+      <div class="announce-intro text-center">
+        <span class="section-label" style="color:var(--gold-dark)">Big News</span>
+        <h2 class="announce-heading">
+          <span class="brand-old">Dwellin</span>
+          <span class="brand-arr">&rarr;</span>
+          <span class="brand-new">Dwellin Rewards</span>
+        </h2>
+        <p id="whats-new-sub" class="announce-sub">All the things that got you excited to try Dwellin are still here &mdash; but now there&rsquo;s so much more.</p>
+      </div>
+
+      <!-- Split: what stayed / what's new -->
+      <div class="announce-split">
+
+        <!-- Left: what stayed -->
+        <div class="announce-col still-here">
+          <div class="announce-col-label">Still here &mdash; exactly as you left it</div>
+          <ul class="announce-list">
+            <li>
+              <span class="al-icon">🏡</span>
+              <span class="al-text">
+                <strong>Home inventory</strong>
+                <span>Every item you added is saved and ready.</span>
+              </span>
+            </li>
+            <li>
+              <span class="al-icon">📖</span>
+              <span class="al-text">
+                <strong>Appliance manuals</strong>
+                <span>All the manuals you&rsquo;ve logged are right where you left them.</span>
+              </span>
+            </li>
+            <li>
+              <span class="al-icon">🧾</span>
+              <span class="al-text">
+                <strong>Your uploaded receipts</strong>
+                <span>Every receipt you saved is stored and searchable.</span>
+              </span>
+            </li>
+            <li>
+              <span class="al-icon">📅</span>
+              <span class="al-text">
+                <strong>Maintenance calendar</strong>
+                <span>Your schedule and reminders are still active.</span>
+              </span>
+            </li>
+          </ul>
         </div>
-        <div class="new-card">
-          <div class="new-tag">New</div>
-          <h4>Upload past receipts &amp; earn retroactively</h4>
-          <p>Have maintenance receipts sitting in a drawer or email? Upload them now and earn points for work already done.</p>
+
+        <!-- Right: what's new -->
+        <div class="announce-col whats-new">
+          <div class="announce-col-label">What&rsquo;s new &mdash; only in Dwellin Rewards</div>
+          <ul class="announce-list">
+            <li>
+              <span class="al-icon">🏅</span>
+              <span class="al-text">
+                <strong>Every action earns you points</strong>
+                <span>Add items, upload receipts, complete tasks &mdash; it all adds up.</span>
+              </span>
+            </li>
+            <li>
+              <span class="al-icon">💰</span>
+              <span class="al-text">
+                <strong>Redeem for real rewards</strong>
+                <span>Gift cards, home savings, and more. 1,000 pts&nbsp;=&nbsp;$10.</span>
+              </span>
+            </li>
+            <li>
+              <span class="al-icon">🧾</span>
+              <span class="al-text">
+                <strong>Earn on receipts you already have</strong>
+                <span>Upload past maintenance receipts and earn points retroactively.</span>
+              </span>
+            </li>
+            <li>
+              <span class="al-icon">📋</span>
+              <span class="al-text">
+                <strong>10-year home record</strong>
+                <span>Insurance-ready documentation built automatically as you go.</span>
+              </span>
+            </li>
+          </ul>
         </div>
-        <div class="new-card">
-          <div class="new-tag">New</div>
-          <h4>10-year home documentation</h4>
-          <p>Every service, inspection, and repair is stored in one place &mdash; insurance-ready and accessible when you need it most.</p>
-        </div>
+
       </div>
     </div>
   </section>
@@ -857,17 +985,20 @@
 
       // ── 2. HERO ──────────────────────────────────────────────────────────
       if (name) {
-        txt("hero-eyebrow", "Welcome back, " + name);
-        txt("hero-h1",      "Your home profile is exactly where you left it.");
+        // Keep the rebrand eyebrow visible but prepend the welcome
+        set("hero-eyebrow",
+          "Welcome back, " + name +
+          " &nbsp;&bull;&nbsp; <span style=\"opacity:.75\">Dwellin &rarr; Dwellin Rewards</span>");
+        txt("hero-h1", "Your home profile is exactly where you left it.");
       }
 
       // Sub-headline: gap acknowledgement takes priority
       if (daysAway > 0) {
         var gap = daysAway === 1 ? "Yesterday" : "It&rsquo;s been " + daysAway + " days";
-        set("hero-sub",       gap + ". Everything you&rsquo;ve shared about your home is still right here.");
+        set("hero-sub",       gap + ". Everything you loved about Dwellin moved with you to Dwellin Rewards.");
         set("hero-sub-small", "Your inventory, manuals, receipts &amp; calendar &mdash; all saved. Nothing was lost.");
       } else if (isP) {
-        set("hero-sub",       "Everything you&rsquo;ve shared about your home is right here in Dwellin.");
+        set("hero-sub",       "Everything you loved about Dwellin is still here &mdash; now it&rsquo;s Dwellin Rewards.");
         set("hero-sub-small", "Your inventory, manuals, receipts &amp; calendar are saved and waiting.");
       }
 
@@ -944,13 +1075,10 @@
         }
       }
 
-      // ── 4. WHAT’S NEW heading ─────────────────────────────────────────────
+      // ── 4. ANNOUNCEMENT sub-line ──────────────────────────────────────────
+      // The heading is static HTML; only the sub-line adapts to gap length
       if (daysAway >= 30) {
-        set("whats-new-heading", "A lot has changed since you&rsquo;ve been away");
-        set("whats-new-sub",     "Dwellin Rewards launched while you were gone. Here&rsquo;s what you&rsquo;ve been missing.");
-      } else if (!isP) {
-        set("whats-new-heading", "Here&rsquo;s what&rsquo;s new in Dwellin");
-        set("whats-new-sub",     "The rewards program is live. Every action you take from here earns you real value.");
+        set("whats-new-sub", "Dwellin Rewards launched while you were away. Here&rsquo;s everything that&rsquo;s new &mdash; and everything that stayed.");
       }
 
       // ── 5. FIRST ACTION heading ───────────────────────────────────────────
