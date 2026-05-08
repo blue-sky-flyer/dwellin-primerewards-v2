@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dwellin Rewards – Your Home Is Waiting</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Design tokens ── */
+    :root {
+      --green:       #2d7a5c;
+      --green-dark:  #1a4a35;
+      --green-light: #4da876;
+      --gold:        #c9a961;
+      --gold-dark:   #b8941a;
+      --gold-bg:     rgba(201,169,97,.09);
+      --text:        #1f2937;
+      --text-muted:  #6b7280;
+      --bg:          #f9fafb;
+      --white:       #ffffff;
+      --border:      #e5e7eb;
+      --success:     #10b981;
+      --radius:      0.5rem;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,.10);
+      --shadow-md:   0 8px 24px rgba(0,0,0,.10);
+      --transition:  all 0.25s ease;
+    }
+
+    /* ── Base ── */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
+    p { color: var(--text-muted); }
+    a { color: var(--green); text-decoration: none; }
+
+    /* ── Layout ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    .section-alt { background: var(--bg); }
+    .text-center { text-align: center; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+    .section-heading { font-size: 1.875rem; color: var(--text); }
+    .section-sub { font-size: 1rem; color: var(--text-muted); max-width: 540px; margin: 0.625rem auto 0; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .btn-gold { background: var(--gold); color: var(--text); }
+    .btn-gold:hover { background: var(--gold-dark); color: var(--text); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,.7); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.15); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: var(--white); }
+    .btn-lg { padding: 1rem 2.5rem; font-size: 1.1rem; }
+
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 1.375rem; font-weight: 800; color: var(--green-dark); letter-spacing: -0.02em; }
+    .logo span { color: var(--gold); }
+    .header-cta {
+      font-size: 0.875rem; font-weight: 600;
+      color: var(--green); border: 1.5px solid var(--green);
+      padding: 0.375rem 1rem; border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .header-cta:hover { background: var(--green); color: var(--white); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      color: var(--white);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -30%; right: -8%;
+      width: 480px; height: 480px;
+      background: rgba(255,255,255,.05); border-radius: 50%; pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -20%; left: -5%;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,.04); border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(201,169,97,.25); color: var(--gold);
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.35rem 1rem; border-radius: 20px; margin-bottom: 1.5rem;
+      border: 1px solid rgba(201,169,97,.4);
+    }
+    .hero h1 { color: var(--white); font-size: 2.75rem; margin-bottom: 1rem; }
+    .hero-sub { color: rgba(255,255,255,.85); font-size: 1.125rem; margin-bottom: 0.5rem; }
+    .hero-sub-small { color: rgba(255,255,255,.65); font-size: 0.95rem; margin-bottom: 2rem; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-stat-row {
+      display: flex; justify-content: center; gap: 2.5rem;
+      margin-top: 3rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.15); flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-number { display: block; font-size: 1.75rem; font-weight: 800; color: var(--gold); }
+    .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,.7); margin: 0; }
+
+    /* ── Profile Saved (personalized, conditional) ── */
+    .profile-saved-section {
+      background: linear-gradient(135deg, rgba(45,122,92,.06) 0%, rgba(26,74,53,.03) 100%);
+      border-bottom: 1px solid rgba(45,122,92,.12);
+    }
+    .profile-saved-card {
+      max-width: 680px; margin: 0 auto;
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      border-top: 4px solid var(--green);
+      overflow: hidden;
+    }
+    .profile-saved-header {
+      padding: 1.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .saved-icon-wrap {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(45,122,92,.1); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.375rem;
+    }
+    .saved-title-group { flex: 1; min-width: 160px; }
+    .saved-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .saved-subtitle { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+    /* Checklist rows */
+    .saved-data-list {
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .saved-data-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .saved-data-row:last-child { border-bottom: none; }
+    .saved-check {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: rgba(16,185,129,.12); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.875rem; color: var(--success); font-weight: 700;
+    }
+    .saved-data-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .saved-data-text { flex: 1; min-width: 0; }
+    .saved-data-title { font-size: 0.9375rem; font-weight: 600; color: var(--text); }
+    .saved-data-desc { font-size: 0.825rem; color: var(--text-muted); margin: 0.1rem 0 0; }
+    .saved-data-badge {
+      flex-shrink: 0;
+      background: rgba(45,122,92,.1); color: var(--green);
+      font-size: 0.78rem; font-weight: 700;
+      padding: 0.25rem 0.75rem; border-radius: 20px;
+      white-space: nowrap;
+    }
+    /* Points row gets gold treatment */
+    .saved-data-row.points-row .saved-check { background: rgba(201,169,97,.15); color: var(--gold-dark); }
+    .saved-data-row.points-row .saved-data-badge { background: rgba(201,169,97,.15); color: var(--gold-dark); }
+    /* Footer with CTA and optional progress */
+    .profile-saved-footer {
+      padding: 1.5rem 2rem;
+      background: var(--bg); border-top: 1px solid var(--border);
+    }
+    .saved-footer-cta-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 0;
+    }
+    .saved-footer-message {
+      font-size: 0.9375rem; color: var(--text); font-weight: 500;
+      flex: 1; min-width: 180px; margin: 0;
+    }
+    .saved-footer-message strong { color: var(--green); }
+    .progress-wrap { margin-top: 1.25rem; }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.375rem;
+    }
+    .progress-track {
+      height: 8px; background: var(--border); border-radius: 99px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--green), var(--green-light));
+      border-radius: 99px; transition: width 0.6s ease 0.3s;
+      width: 0%;
+    }
+
+    /* ── What's New ── */
+    .new-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .new-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1.5rem; box-shadow: var(--shadow-sm);
+      border-top: 3px solid var(--gold);
+      transition: var(--transition);
+    }
+    .new-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .new-tag {
+      display: inline-block; background: rgba(201,169,97,.15); color: var(--gold-dark);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 20px; margin-bottom: 0.75rem;
+    }
+    .new-card h4 { font-size: 1rem; color: var(--text); margin-bottom: 0.375rem; }
+    .new-card p { font-size: 0.875rem; margin: 0; }
+
+    /* ── How It Works ── */
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .step {
+      background: var(--white); border-radius: var(--radius);
+      padding: 2rem 1.5rem; box-shadow: var(--shadow-sm);
+      text-align: center; position: relative;
+    }
+    .step-number {
+      width: 44px; height: 44px; background: var(--green); color: var(--white);
+      border-radius: 50%; font-size: 1.125rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--green-dark); }
+    .step p { font-size: 0.9rem; margin: 0; }
+    .step-arrow {
+      position: absolute; right: -1.1rem; top: 50%; transform: translateY(-50%);
+      font-size: 1.25rem; color: var(--border); z-index: 2;
+    }
+
+    /* ── Points Value ── */
+    .value-card {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow-md); padding: 2.5rem;
+      max-width: 680px; margin: 2.5rem auto 0; text-align: center;
+    }
+    .conversion-badge {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: linear-gradient(135deg, rgba(201,169,97,.12) 0%, rgba(201,169,97,.06) 100%);
+      border: 1.5px solid rgba(201,169,97,.4);
+      border-radius: 12px; padding: 1rem 2rem; margin-bottom: 1.5rem;
+    }
+    .eq-num { font-size: 1.75rem; font-weight: 800; color: var(--text); }
+    .eq-sep { font-size: 1.5rem; color: var(--gold); font-weight: 700; }
+    .eq-dollar { font-size: 1.75rem; font-weight: 800; color: var(--gold); }
+    .redemption-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.625rem;
+      margin: 1.5rem 0; text-align: left;
+    }
+    .redemption-list li {
+      display: flex; align-items: center; gap: 0.625rem;
+      font-size: 0.95rem; color: var(--text);
+    }
+    .redemption-list li::before { content: '✓'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+    .value-highlight { font-size: 0.875rem; color: var(--green); font-weight: 600; margin: 0; }
+
+    /* ── First Action ── */
+    .action-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin: 2rem 0;
+    }
+    .action-card {
+      background: var(--white); border: 2px solid var(--border);
+      border-left: 4px solid var(--green); border-radius: var(--radius);
+      padding: 1.5rem 1.25rem; cursor: pointer; transition: var(--transition);
+      display: block;
+    }
+    .action-card:hover { border-color: var(--green); border-left-color: var(--green); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .action-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .action-card h4 { font-size: 0.95rem; color: var(--green-dark); margin-bottom: 0.375rem; }
+    .action-card p { font-size: 0.85rem; margin: 0; }
+    .action-points {
+      display: inline-block; background: rgba(16,185,129,.1); color: var(--success);
+      font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem;
+      border-radius: 20px; margin-top: 0.75rem;
+    }
+    .action-cta-wrap { text-align: center; margin-top: 0.5rem; }
+
+    /* ── Social Proof ── */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .testimonial {
+      background: var(--white); border-left: 4px solid var(--gold);
+      border-radius: var(--radius); padding: 1.75rem 1.5rem; box-shadow: var(--shadow-sm);
+    }
+    .testimonial-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .testimonial-quote { font-style: italic; color: var(--text); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.55; }
+    .testimonial-author { font-weight: 700; font-size: 0.875rem; color: var(--green-dark); margin: 0; }
+    .testimonial-detail { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+    .proof-bar {
+      display: flex; justify-content: center; align-items: center;
+      gap: 2.5rem; margin-top: 2.5rem; padding: 1.5rem;
+      background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); flex-wrap: wrap;
+    }
+    .proof-item { text-align: center; }
+    .proof-num { display: block; font-size: 1.5rem; font-weight: 800; color: var(--green); }
+    .proof-label { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+
+    /* ── Prime Cards ── */
+    .prime-card {
+      max-width: 640px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(201,169,97,.08) 0%, rgba(201,169,97,.03) 100%);
+      border: 2px solid rgba(201,169,97,.4);
+      border-radius: var(--radius); padding: 2.5rem; text-align: center;
+    }
+    .prime-badge {
+      display: inline-block; background: var(--gold); color: var(--text);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.25rem;
+    }
+    .prime-card h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .prime-card p { margin-bottom: 1.5rem; }
+    .prime-link { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.75rem; }
+    /* Prime member welcome variant */
+    .prime-member-card {
+      max-width: 640px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(45,122,92,.08) 0%, rgba(26,74,53,.04) 100%);
+      border: 2px solid rgba(45,122,92,.25);
+      border-radius: var(--radius); padding: 2.5rem; text-align: center;
+    }
+    .prime-member-badge {
+      display: inline-block; background: var(--green); color: var(--white);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.25rem;
+    }
+    .prime-member-card h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .prime-member-card p { margin-bottom: 1.5rem; }
+
+    /* ── Final CTA ── */
+    .final-cta {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      padding: 5rem 1.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: ''; position: absolute; top: -40%; left: -10%;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,.04); border-radius: 50%; pointer-events: none;
+    }
+    .final-cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+    .final-cta h2 { color: var(--white); font-size: 2rem; margin-bottom: 0.75rem; }
+    .final-cta p { color: rgba(255,255,255,.8); font-size: 1rem; margin-bottom: 2rem; }
+    .final-cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .store-no-app { color: rgba(255,255,255,.65); font-size: 0.875rem; margin-bottom: 1rem; }
+    .store-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.3);
+      color: var(--white); padding: 0.625rem 1.25rem;
+      border-radius: var(--radius); font-size: 0.875rem; font-weight: 600; transition: var(--transition);
+    }
+    .store-btn:hover { background: rgba(255,255,255,.22); color: var(--white); }
+    .store-btn-icon { font-size: 1.25rem; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,.55);
+      padding: 2rem 1.5rem; text-align: center; font-size: 0.8rem;
+    }
+    footer a { color: rgba(255,255,255,.55); }
+    footer a:hover { color: var(--white); }
+    footer .footer-sep { margin: 0 0.5rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .steps-grid, .new-grid, .action-cards { grid-template-columns: 1fr; }
+      .step-arrow { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-stat-row { gap: 1.5rem; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-buttons .btn { width: 100%; max-width: 320px; }
+      .final-cta-buttons { flex-direction: column; align-items: center; }
+      .final-cta-buttons .btn { width: 100%; max-width: 320px; }
+      .section { padding: 3rem 1.25rem; }
+      .saved-footer-cta-row { flex-direction: column; }
+      .saved-data-badge { display: none; }
+      .profile-saved-header { gap: 0.75rem; }
+      .profile-saved-header .btn { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .hero h1 { font-size: 1.75rem; }
+      .conversion-badge { flex-direction: column; gap: 0.25rem; }
+      .proof-bar { gap: 1.5rem; }
+      .value-card, .prime-card, .prime-member-card { padding: 1.75rem 1.25rem; }
+      .profile-saved-header, .profile-saved-body, .profile-saved-footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       HEADER
+  ═══════════════════════════════ -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">Dwellin<span>.</span></a>
+      <a href="#" id="header-cta" class="header-cta">Open App</a>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════
+       HERO
+  ═══════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div id="hero-eyebrow" class="hero-eyebrow">Dwellin Rewards</div>
+      <h1 id="hero-h1">Your home can earn you rewards</h1>
+      <p id="hero-sub" class="hero-sub">Track your home &rarr; earn points &rarr; redeem real rewards</p>
+      <p id="hero-sub-small" class="hero-sub-small">Start earning in under 60 seconds</p>
+      <div class="hero-buttons">
+        <a href="#" id="hero-primary-cta" class="btn btn-gold btn-lg">Continue in App</a>
+        <a href="#" id="hero-secondary-cta" class="btn btn-outline-white btn-lg">Get the App</a>
+      </div>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <span id="stat-points" class="hero-stat-number">$425+</span>
+          <p id="stat-points-label" class="hero-stat-label">potential annual value</p>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">1,000 pts</span>
+          <p class="hero-stat-label">= $10 redeemable</p>
+        </div>
+        <div class="hero-stat">
+          <span id="stat-third" class="hero-stat-number">&lt; 60 sec</span>
+          <p id="stat-third-label" class="hero-stat-label">to earn your first points</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       PROFILE SAVED  (hidden until JS reveals it for personalized visits)
+  ═══════════════════════════════ -->
+  <section id="profile-saved" class="section profile-saved-section" style="display:none">
+    <div class="container">
+      <div class="profile-saved-card">
+
+        <!-- Header -->
+        <div class="profile-saved-header">
+          <div class="saved-icon-wrap">🏠</div>
+          <div class="saved-title-group">
+            <p class="saved-title" id="saved-title">Everything you&rsquo;ve shared about your home is all here in Dwellin.</p>
+            <p class="saved-subtitle" id="saved-subtitle">Nothing was lost. Pick up right where you stopped.</p>
+          </div>
+          <a href="#" class="btn btn-gold" id="saved-resume-btn">Resume &rarr;</a>
+        </div>
+
+        <!-- Data checklist rows -->
+        <div class="saved-data-list">
+
+          <div class="saved-data-row" id="row-inventory">
+            <div class="saved-check">&#10003;</div>
+            <div class="saved-data-icon">🏡</div>
+            <div class="saved-data-text">
+              <div class="saved-data-title">Home inventory</div>
+              <p class="saved-data-desc" id="desc-inventory">Your home inventory is saved and up to date.</p>
+            </div>
+            <div class="saved-data-badge" id="badge-inventory">Saved</div>
+          </div>
+
+          <div class="saved-data-row" id="row-manuals">
+            <div class="saved-check">&#10003;</div>
+            <div class="saved-data-icon">📖</div>
+            <div class="saved-data-text">
+              <div class="saved-data-title">Appliance manuals</div>
+              <p class="saved-data-desc" id="desc-manuals">Manuals for all the appliances you&rsquo;ve told us about.</p>
+            </div>
+            <div class="saved-data-badge" id="badge-manuals">Saved</div>
+          </div>
+
+          <div class="saved-data-row" id="row-receipts">
+            <div class="saved-check">&#10003;</div>
+            <div class="saved-data-icon">🧾</div>
+            <div class="saved-data-text">
+              <div class="saved-data-title">Uploaded receipts</div>
+              <p class="saved-data-desc" id="desc-receipts">All the receipts you&rsquo;ve uploaded are stored and ready.</p>
+            </div>
+            <div class="saved-data-badge" id="badge-receipts">Saved</div>
+          </div>
+
+          <div class="saved-data-row" id="row-calendar">
+            <div class="saved-check">&#10003;</div>
+            <div class="saved-data-icon">📅</div>
+            <div class="saved-data-text">
+              <div class="saved-data-title">Home maintenance calendar</div>
+              <p class="saved-data-desc">Your maintenance schedule is still active and ready to go.</p>
+            </div>
+            <div class="saved-data-badge">Ready</div>
+          </div>
+
+          <!-- Points row — shown only when points param is present -->
+          <div class="saved-data-row points-row" id="row-points" style="display:none">
+            <div class="saved-check">&#9733;</div>
+            <div class="saved-data-icon">🏅</div>
+            <div class="saved-data-text">
+              <div class="saved-data-title">Your reward points</div>
+              <p class="saved-data-desc" id="desc-points">Points you&rsquo;ve already earned &mdash; waiting to be redeemed.</p>
+            </div>
+            <div class="saved-data-badge" id="badge-points">Loading&hellip;</div>
+          </div>
+
+        </div>
+
+        <!-- Footer: motivational message + optional progress bar -->
+        <div class="profile-saved-footer">
+          <div class="saved-footer-cta-row">
+            <p class="saved-footer-message">Keep doing what you&rsquo;ve been doing &mdash; <strong>now every action earns you points.</strong></p>
+            <a href="#" class="btn btn-gold" id="saved-footer-cta">Resume in App</a>
+          </div>
+          <div id="saved-progress-row" class="progress-wrap" style="display:none">
+            <div class="progress-label">
+              <span>Progress to first reward</span>
+              <span id="progress-pct">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progress-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       WHAT'S NEW
+  ═══════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container text-center">
+      <span class="section-label">What&rsquo;s New</span>
+      <h2 id="whats-new-heading" class="section-heading">Here&rsquo;s what changed since you last visited</h2>
+      <p id="whats-new-sub" class="section-sub">Dwellin Rewards is fully live &mdash; and it&rsquo;s even better than when you first signed up.</p>
+      <div class="new-grid">
+        <div class="new-card">
+          <div class="new-tag">New</div>
+          <h4>Earn points on every action</h4>
+          <p>Every item you add, receipt you upload, and task you complete now earns redeemable points &mdash; automatically.</p>
+        </div>
+        <div class="new-card">
+          <div class="new-tag">New</div>
+          <h4>Upload past receipts &amp; earn retroactively</h4>
+          <p>Have maintenance receipts sitting in a drawer or email? Upload them now and earn points for work already done.</p>
+        </div>
+        <div class="new-card">
+          <div class="new-tag">New</div>
+          <h4>10-year home documentation</h4>
+          <p>Every service, inspection, and repair is stored in one place &mdash; insurance-ready and accessible when you need it most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════ -->
+  <section class="section">
+    <div class="container text-center">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-heading">Three steps. Real rewards.</h2>
+      <p class="section-sub">No complicated setup. Just add what you own, and Dwellin handles the rest.</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Add something important</h3>
+          <p>HVAC system, water heater, major appliances &mdash; any home system counts.</p>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Earn points automatically</h3>
+          <p>Get rewarded for keeping your home updated and documenting services.</p>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Redeem for real value</h3>
+          <p>Turn your points into gift cards, home savings, or exclusive benefits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       POINTS VALUE
+  ═══════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container text-center">
+      <span class="section-label">What Your Points Are Worth</span>
+      <h2 class="section-heading">Every action adds up fast</h2>
+      <div class="value-card">
+        <div class="conversion-badge">
+          <span class="eq-num">1,000 pts</span>
+          <span class="eq-sep">=</span>
+          <span class="eq-dollar">$10</span>
+        </div>
+        <ul class="redemption-list">
+          <li>Redeem for gift cards at popular retailers</li>
+          <li>Unlock savings on home services and expenses</li>
+          <li>Stack rewards over time &mdash; points never expire</li>
+          <li>Combine with Prime reimbursements for maximum value</li>
+        </ul>
+        <p class="value-highlight">Prime members can earn $425+ in annual reimbursements &mdash; 4&times; the membership cost &rarr;</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       FIRST ACTION
+  ═══════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Quick Start</span>
+        <h2 id="first-action-heading" class="section-heading">Start with one simple action</h2>
+        <p id="first-action-sub" class="section-sub">Pick any of these &mdash; all take less than a minute and earn you points immediately.</p>
+      </div>
+      <div class="action-cards">
+        <a href="#" class="action-card">
+          <div class="action-icon">🌡️</div>
+          <h4>Add your HVAC system</h4>
+          <p>Model, install year, last service &mdash; takes 60 seconds.</p>
+          <div class="action-points">+ 200 pts</div>
+        </a>
+        <a href="#" class="action-card">
+          <div class="action-icon">🧾</div>
+          <h4>Upload a home service receipt</h4>
+          <p>Any recent maintenance receipt qualifies.</p>
+          <div class="action-points">+ 150 pts</div>
+        </a>
+        <a href="#" class="action-card">
+          <div class="action-icon">🏠</div>
+          <h4>Add your most-used appliance</h4>
+          <p>Refrigerator, washer, dryer &mdash; whatever matters most.</p>
+          <div class="action-points">+ 100 pts</div>
+        </a>
+      </div>
+      <div class="action-cta-wrap">
+        <a href="#" id="first-action-cta" class="btn btn-gold btn-lg">Start earning now</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       SOCIAL PROOF
+  ═══════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Member Stories</span>
+        <h2 class="section-heading">Homeowners who are already earning</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-quote">&ldquo;I uploaded three receipts from last year&rsquo;s HVAC service and had $225 in rewards within the week. I&rsquo;d have thrown those receipts away otherwise.&rdquo;</p>
+          <p class="testimonial-author">Marcus T.</p>
+          <p class="testimonial-detail">Single-family home &middot; Austin, TX</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-quote">&ldquo;When our roof had a hail claim, we pulled up three years of documented inspections in Dwellin. The claim was approved in days, not weeks.&rdquo;</p>
+          <p class="testimonial-author">Priya &amp; Dev K.</p>
+          <p class="testimonial-detail">4-bedroom home &middot; Denver, CO</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-quote">&ldquo;As a first-time homeowner I had no idea what needed maintenance. Now I know exactly what to do and I earn points for everything I check off.&rdquo;</p>
+          <p class="testimonial-author">Jordan S.</p>
+          <p class="testimonial-detail">First-time homeowner &middot; Charlotte, NC</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-quote">&ldquo;My membership cost $99. I got back $150 on the HVAC service alone. Everything after that is pure upside.&rdquo;</p>
+          <p class="testimonial-author">Lisa M.</p>
+          <p class="testimonial-detail">Townhouse &middot; Nashville, TN</p>
+        </div>
+      </div>
+      <div class="proof-bar">
+        <div class="proof-item">
+          <span class="proof-num">4.8&#9733;</span>
+          <p class="proof-label">App Store rating</p>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">$225</span>
+          <p class="proof-label">avg. first-year rewards</p>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">2 days</span>
+          <p class="proof-label">to first reward redemption</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       PRIME UPSELL  (free users only — hidden for Prime members)
+  ═══════════════════════════════ -->
+  <section id="prime-section" class="section">
+    <div class="container text-center">
+      <div class="prime-card">
+        <div class="prime-badge">Dwellin Prime</div>
+        <h2>Want to earn faster?</h2>
+        <p>Prime members earn rewards 2&times; faster, receive direct reimbursements ($75&ndash;$150) on major services, and unlock comprehensive 10-year home documentation &mdash; all for $99/year.</p>
+        <a href="#" class="btn btn-gold btn-lg">Explore Dwellin Prime</a>
+        <p class="prime-link"><a href="#">Continue with free rewards &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prime member acknowledgment (shown only for Prime members) -->
+  <section id="prime-welcome" class="section" style="display:none">
+    <div class="container text-center">
+      <div class="prime-member-card">
+        <div class="prime-member-badge">&#10003; Dwellin Prime Member</div>
+        <h2>You&rsquo;re earning at full speed.</h2>
+        <p>As a Prime member you earn 2&times; faster, qualify for direct reimbursements on major services, and have full access to 10-year home documentation. Make sure every service and appliance is logged so nothing goes uncredited.</p>
+        <a href="#" id="prime-member-cta" class="btn btn-outline-green btn-lg">Review my home profile</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       FINAL CTA
+  ═══════════════════════════════ -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2 id="final-cta-h2">Your rewards are waiting.</h2>
+      <p id="final-cta-sub">You&rsquo;re already a Dwellin member. Pick up where you left off &mdash; or download the app if you&rsquo;re on a new device.</p>
+      <div class="final-cta-buttons">
+        <a href="#" id="final-primary-cta" class="btn btn-gold btn-lg">Resume in App</a>
+        <a href="#" id="final-secondary-cta" class="btn btn-outline-white btn-lg">Get the App</a>
+      </div>
+      <p class="store-no-app">Don&rsquo;t have the app on this device?</p>
+      <div class="store-links">
+        <a href="#" class="store-btn">
+          <span class="store-btn-icon">&#63743;</span>
+          <span>App Store</span>
+        </a>
+        <a href="#" class="store-btn">
+          <span class="store-btn-icon">&#9654;</span>
+          <span>Google Play</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ═══════════════════════════════ -->
+  <footer>
+    <p>
+      &copy; 2026 Dwellin, Inc.
+      <span class="footer-sep">&middot;</span>
+      <a href="#">Privacy Policy</a>
+      <span class="footer-sep">&middot;</span>
+      <a href="#">Terms</a>
+      <span class="footer-sep">&middot;</span>
+      <a href="mailto:support@dwellin.com">Support</a>
+    </p>
+  </footer>
+
+
+  <!-- ═══════════════════════════════
+       PERSONALIZATION SCRIPT
+       Reads URL params and updates the page.
+       All changes degrade gracefully — if no params are present,
+       the static fallback copy is shown unchanged.
+
+       Supported params:
+         name        — first name, e.g. "Sarah"
+         points      — integer points balance, e.g. "450"
+         days_away   — integer days since last session, e.g. "47"
+         inventory   — integer count of home inventory items, e.g. "12"
+         manuals     — integer count of appliance manuals, e.g. "5"
+         receipts    — integer count of uploaded receipts, e.g. "8"
+         progress    — integer 0–100 toward first reward, e.g. "65"
+         tier        — "free" (default) or "prime"
+  ═══════════════════════════════ -->
+  <script>
+    (function () {
+      var p         = new URLSearchParams(window.location.search);
+      var name      = (p.get("name") || p.get("first_name") || "").trim();
+      var points    = Math.max(0, parseInt(p.get("points"))    || 0);
+      var daysAway  = Math.max(0, parseInt(p.get("days_away")) || 0);
+      var inventory = Math.max(0, parseInt(p.get("inventory")) || 0);
+      var manuals   = Math.max(0, parseInt(p.get("manuals"))   || 0);
+      var receipts  = Math.max(0, parseInt(p.get("receipts"))  || 0);
+      var progress  = Math.min(100, Math.max(0, parseInt(p.get("progress")) || 0));
+      var tier      = (p.get("tier") || "free").toLowerCase();
+      var isPrime   = tier === "prime";
+      var isP       = !!(name || points || inventory || manuals || receipts || daysAway || progress);
+
+      // Helpers — all string args use double quotes; apostrophes use the &rsquo; entity via set()
+      function fmt(n)   { return n.toLocaleString(); }
+      function $el(id)  { return document.getElementById(id); }
+      function set(id, html) { var e = $el(id); if (e) e.innerHTML = html; }
+      function txt(id, val)  { var e = $el(id); if (e) e.textContent = val; }
+      function show(id) { var e = $el(id); if (e) e.style.display = ""; }
+      function hide(id) { var e = $el(id); if (e) e.style.display = "none"; }
+      function pl(n, w) { return n + " " + w + (n !== 1 ? "s" : ""); }  // pluralise
+
+      // ── 1. HEADER ────────────────────────────────────────────────────────
+      txt("header-cta", name ? "Resume, " + name : "Resume in App");
+
+      // ── 2. HERO ──────────────────────────────────────────────────────────
+      if (name) {
+        txt("hero-eyebrow", "Welcome back, " + name);
+        txt("hero-h1",      "Your home profile is exactly where you left it.");
+      }
+
+      // Sub-headline: gap acknowledgement takes priority
+      if (daysAway > 0) {
+        var gap = daysAway === 1 ? "Yesterday" : "It&rsquo;s been " + daysAway + " days";
+        set("hero-sub",       gap + ". Everything you&rsquo;ve shared about your home is still right here.");
+        set("hero-sub-small", "Your inventory, manuals, receipts &amp; calendar &mdash; all saved. Nothing was lost.");
+      } else if (isP) {
+        set("hero-sub",       "Everything you&rsquo;ve shared about your home is right here in Dwellin.");
+        set("hero-sub-small", "Your inventory, manuals, receipts &amp; calendar are saved and waiting.");
+      }
+
+      // CTA copy: "Resume" for returning users
+      var ctaLabel = isP ? "Resume in App" : "Continue in App";
+      txt("hero-primary-cta",  ctaLabel);
+      txt("final-primary-cta", ctaLabel);
+
+      // Hero stats: swap in live data when available
+      if (points > 0) {
+        set("stat-points",       fmt(points) + " pts");
+        set("stat-points-label", "already earned &mdash; waiting for you");
+      }
+      if (daysAway > 0) {
+        set("stat-third",       daysAway + (daysAway === 1 ? " day" : " days"));
+        set("stat-third-label", "since your last visit");
+      } else if (receipts > 0) {
+        set("stat-third",       receipts);
+        set("stat-third-label", pl(receipts, "receipt") + " saved");
+      }
+
+      // ── 3. PROFILE SAVED CARD ────────────────────────────────────────────
+      if (isP) {
+        show("profile-saved");
+
+        // Header title — most specific wins
+        if (name && daysAway > 0) {
+          set("saved-title",    name + ", everything you&rsquo;ve shared about your home is all here in Dwellin.");
+          set("saved-subtitle", pl(daysAway, "day") + " since your last session &mdash; nothing was lost.");
+        } else if (name) {
+          set("saved-title",    name + ", everything you&rsquo;ve shared about your home is right here.");
+        } else if (daysAway > 0) {
+          set("saved-subtitle", pl(daysAway, "day") + " since your last session &mdash; nothing was lost.");
+        }
+
+        // Resume buttons
+        var resumeLabel = name ? "Resume, " + name + " →" : "Resume in App";
+        txt("saved-resume-btn", resumeLabel);
+        txt("saved-footer-cta", resumeLabel);
+
+        // Inventory row
+        if (inventory > 0) {
+          set("desc-inventory",  "We have the home inventory you created &mdash; " + pl(inventory, "item") + " saved.");
+          txt("badge-inventory", pl(inventory, "item"));
+        }
+
+        // Manuals row
+        if (manuals > 0) {
+          set("desc-manuals",  "We have the manuals for all " + pl(manuals, "appliance") + " you&rsquo;ve told us about.");
+          txt("badge-manuals", pl(manuals, "manual"));
+        }
+
+        // Receipts row
+        if (receipts > 0) {
+          set("desc-receipts",  "All " + pl(receipts, "receipt") + " you&rsquo;ve uploaded are stored and ready.");
+          txt("badge-receipts", pl(receipts, "receipt"));
+        }
+
+        // Points row — only visible when a balance exists
+        if (points > 0) {
+          show("row-points");
+          set("desc-points",  fmt(points) + " points already earned &mdash; ready to redeem.");
+          txt("badge-points", fmt(points) + " pts");
+        }
+
+        // Progress bar — animate after a tick so the transition fires
+        if (progress > 0) {
+          show("saved-progress-row");
+          txt("progress-pct", progress + "%");
+          setTimeout(function () {
+            var fill = $el("progress-bar-fill");
+            if (fill) fill.style.width = progress + "%";
+          }, 80);
+        }
+      }
+
+      // ── 4. WHAT’S NEW heading ─────────────────────────────────────────────
+      if (daysAway >= 30) {
+        set("whats-new-heading", "A lot has changed since you&rsquo;ve been away");
+        set("whats-new-sub",     "Dwellin Rewards launched while you were gone. Here&rsquo;s what you&rsquo;ve been missing.");
+      } else if (!isP) {
+        set("whats-new-heading", "Here&rsquo;s what&rsquo;s new in Dwellin");
+        set("whats-new-sub",     "The rewards program is live. Every action you take from here earns you real value.");
+      }
+
+      // ── 5. FIRST ACTION heading ───────────────────────────────────────────
+      if (inventory > 0 || receipts > 0) {
+        set("first-action-heading", "Keep doing what you&rsquo;ve been doing");
+        set("first-action-sub",     "You&rsquo;ve already built a great home profile. Every action you take now earns you points.");
+        txt("first-action-cta",     "Continue earning");
+      }
+
+      // ── 6. FINAL CTA ─────────────────────────────────────────────────────
+      if (name && points > 0) {
+        set("final-cta-h2",  name + ", you have " + fmt(points) + " points waiting.");
+        set("final-cta-sub", "Open the app to redeem them or keep earning. Your home profile is right where you left it.");
+      } else if (name) {
+        set("final-cta-h2",  "Your rewards are waiting, " + name + ".");
+        set("final-cta-sub", "Your home profile is right where you left it. Open the app to resume.");
+      } else if (points > 0) {
+        set("final-cta-h2",  "You have " + fmt(points) + " points waiting.");
+        set("final-cta-sub", "Open the app to redeem them or keep earning.");
+      }
+
+      // ── 7. PRIME TIER ────────────────────────────────────────────────────
+      if (isPrime) {
+        hide("prime-section");
+        show("prime-welcome");
+        if (name) txt("prime-member-cta", "Resume, " + name + " →");
+      }
+
+    }());
+  </script>
+
+</body>
+</html>
